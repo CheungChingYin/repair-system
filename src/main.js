@@ -8,6 +8,9 @@ import 'element-ui/lib/theme-chalk/index.css'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
+// import Login from './components/Login'
+// import Home from './components/Home'
+
 Vue.config.productionTip = false
 
 Vue.use(ElementUI)
