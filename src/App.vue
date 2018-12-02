@@ -14,4 +14,8 @@ export default {
   .el-form-item.is-required:not(.is-no-asterisk) > .el-form-item__label:before {
     content: '';
   }
+  *{
+    padding: 0;
+    margin: 0;
+  }
 </style>

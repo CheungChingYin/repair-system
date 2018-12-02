@@ -1,41 +1,111 @@
 <template>
-<div class="home">
-  <el-container>
-    <el-header>Header</el-header>
+  <div class="home">
     <el-container>
-      <el-aside width="200px">Aside</el-aside>
-      <el-main>Main</el-main>
+      <el-header height="80px" style="text-align: right; font-size: 24px">
+        <el-dropdown>
+          <i class="el-icon-setting" style="margin-right: 10px;color: #fff;"></i>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item>管理员信息</el-dropdown-item>
+            <el-dropdown-item>账户设置</el-dropdown-item>
+            <el-dropdown-item>登出</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+        <span>王小虎</span>
+      </el-header>
+      <el-container>
+        <el-aside width="300px">
+          <el-scrollbar>
+            <el-menu
+              default-active="/Home/Admin"
+              @open="handleOpen"
+              @close="handleClose"
+              background-color="#545c64"
+              text-color="#fff"
+              active-text-color="#ffd04b"
+              router="true">
+              <el-menu-item index="/Home/Admin">
+                <template slot="title">
+                  <i class="el-icon-info"></i>
+                  <span>管理员管理</span>
+                </template>
+              </el-menu-item>
+              <el-submenu index="1">
+                <template slot="title">
+                  <i class="el-icon-document"></i>
+                  <span>维修工单管理</span>
+                </template>
+                <el-menu-item-group>
+                  <el-menu-item index="1-1">受理工单</el-menu-item>
+                  <el-menu-item index="1-2">工单历史</el-menu-item>
+                </el-menu-item-group>
+              </el-submenu>
+              <el-menu-item index="3">
+                <i class="el-icon-menu"></i>
+                <span slot="title">实训室管理</span>
+              </el-menu-item>
+              <el-menu-item index="4">
+                <i class="el-icon-location-outline"></i>
+                <span slot="title">实训楼管理</span>
+              </el-menu-item>
+              <el-menu-item index="3">
+                <i class="el-icon-picture-outline"></i>
+                <span slot="title">二维码管理</span>
+              </el-menu-item>
+            </el-menu>
+          </el-scrollbar>
+        </el-aside>
+        <el-main>
+          <router-view/>
+        </el-main>
+      </el-container>
     </el-container>
-  </el-container>
-</div>
+  </div>
 </template>
 
 <script>
+import Admin from '../components/Admin'
 export default {
-  name: 'Home'
+  name: 'Home',
+  // data(){
+  //   return{
+  //
+  //   }
+  // }
+  component: {
+    Admin
+  },
+  methods: {
+    handleOpen (key, keyPath) {
+      console.log(key, keyPath)
+    },
+    handleClose (key, keyPath) {
+      console.log(key, keyPath)
+    }
+  }
 }
 </script>
 
 <style scoped>
   .el-header, .el-footer {
-    background-color: #B3C0D1;
-    color: #333;
+    background-color: #545c64;
+    color: #fff;
     text-align: center;
     line-height: 60px;
   }
 
   .el-aside {
-    background-color: #D3DCE6;
+    background-color: #545c64;
     color: #333;
-    text-align: center;
+    text-align: left;
     line-height: 200px;
+    height: 100%;
   }
 
   .el-main {
     background-color: #E9EEF3;
     color: #333;
     text-align: center;
-    line-height: 160px;
+    line-height: 100px;
   }
 
   body > .el-container {
