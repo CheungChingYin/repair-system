@@ -65,17 +65,15 @@ export default {
               'Accept': '*/*'
             }
           }).then(function (res) {
-            console.log(res)
+            // console.log(res)
             if (res.data.status === 200) {
               this.$message({
                 message: '登陆成功！',
                 type: 'success'
               })
+              this.$store.state.adminInfo = res.data.data.adminInfo
               this.$router.push({
-                name: 'Home',
-                params: {
-                  adminInfo: res.data.adminInfo
-                }
+                name: 'Home'
               })
             } else {
               this.$message({

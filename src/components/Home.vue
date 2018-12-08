@@ -1,16 +1,21 @@
 <template>
   <div class="home">
     <el-container>
-      <el-header height="80px" style="text-align: right; font-size: 24px">
-        <el-dropdown>
-          <i class="el-icon-setting" style="margin-right: 10px;color: #fff;"></i>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>管理员信息</el-dropdown-item>
-            <el-dropdown-item>账户设置</el-dropdown-item>
-            <el-dropdown-item>登出</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
-        <span>王小虎</span>
+      <el-header height="80px" style="font-size: 24px">
+        <el-row type="flex">
+          <el-col :span="22"><span>佛山职业技术学院机房管理团队</span></el-col>
+          <el-col :span="2">
+            <el-dropdown>
+              <i class="el-icon-setting" style="margin-right: 10px;color: #fff;"></i>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item>管理员信息</el-dropdown-item>
+                <el-dropdown-item>账户设置</el-dropdown-item>
+                <el-dropdown-item>登出</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+            <span>{{$store.state.adminInfo.adminName}}</span>
+          </el-col>
+        </el-row>
       </el-header>
       <el-container>
         <el-aside width="300px">
@@ -22,7 +27,7 @@
               background-color="#545c64"
               text-color="#fff"
               active-text-color="#ffd04b"
-              router="true">
+              :router="true">
               <el-menu-item index="/Home/Admin">
                 <template slot="title">
                   <i class="el-icon-info"></i>
@@ -63,16 +68,12 @@
 </template>
 
 <script>
-import Admin from '../components/Admin'
 export default {
   name: 'Home',
-  // data(){
-  //   return{
-  //
-  //   }
-  // }
-  component: {
-    Admin
+  data () {
+    return {
+      // adminInfo: {}
+    }
   },
   methods: {
     handleOpen (key, keyPath) {
@@ -80,7 +81,16 @@ export default {
     },
     handleClose (key, keyPath) {
       console.log(key, keyPath)
+    },
+    init () {
+      this.$router.push({
+        name: 'Admin'
+      })
     }
+  },
+  mounted () {
+    // this.adminInfo = this.$store.state.adminInfo
+    this.init()
   }
 }
 </script>
@@ -89,7 +99,6 @@ export default {
   .el-header, .el-footer {
     background-color: #545c64;
     color: #fff;
-    text-align: center;
     line-height: 60px;
   }
 
@@ -98,14 +107,13 @@ export default {
     color: #333;
     text-align: left;
     line-height: 200px;
-    height: 100%;
+    height: 1024px;
   }
 
   .el-main {
     background-color: #E9EEF3;
     color: #333;
-    text-align: center;
-    line-height: 100px;
+    line-height: 80px;
   }
 
   body > .el-container {
