@@ -14,7 +14,7 @@
         <el-button type="primary" @click="addAdminEvent">添加管理员</el-button>
       </el-col>
     </el-row>
-    <el-row type="flex" justify="center">
+    <el-row type="flex" justify="center" style="margin-top: 20px">
       <el-table
         :data="Info"
         stripe

@@ -20,7 +20,8 @@ Vue.use(vuex)
 
 var store = new vuex.Store({// store对象
   state: {
-    adminInfo: {}
+    adminInfo: {},
+    ServerDomain: 'http://localhost:8081'
   }
 })
 /* eslint-disable no-new */

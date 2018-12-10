@@ -40,7 +40,7 @@
                   <span>维修工单管理</span>
                 </template>
                 <el-menu-item-group>
-                  <el-menu-item index="1-1">受理工单</el-menu-item>
+                  <el-menu-item index="/Home/Orders">受理工单</el-menu-item>
                   <el-menu-item index="1-2">工单历史</el-menu-item>
                 </el-menu-item-group>
               </el-submenu>
@@ -106,26 +106,15 @@ export default {
     background-color: #545c64;
     color: #333;
     text-align: left;
-    line-height: 200px;
     height: 1024px;
   }
 
   .el-main {
     background-color: #E9EEF3;
     color: #333;
-    line-height: 80px;
   }
 
   body > .el-container {
     margin-bottom: 40px;
-  }
-
-  .el-container:nth-child(5) .el-aside,
-  .el-container:nth-child(6) .el-aside {
-    line-height: 260px;
-  }
-
-  .el-container:nth-child(7) .el-aside {
-    line-height: 320px;
   }
 </style>

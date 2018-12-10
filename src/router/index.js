@@ -3,8 +3,8 @@ import Router from 'vue-router'
 import Login from '../components/Login'
 import Home from '../components/Home'
 import Admin from '../components/Admin'
+import Orders from '../components/Orders'
 
-// const Login = resolve => require(['@/components/Login'], resolve)
 Vue.use(Router)
 
 export default new Router({
@@ -23,6 +23,11 @@ export default new Router({
           path: 'Admin',
           name: 'Admin',
           component: Admin
+        },
+        {
+          path: 'Orders',
+          name: 'Orders',
+          component: Orders
         }
       ]
     }
