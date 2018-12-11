@@ -37,10 +37,16 @@
               <el-submenu index="1">
                 <template slot="title">
                   <i class="el-icon-document"></i>
-                  <span>维修工单管理</span>
+                  <el-badge :value="showOrderCount" class="item">
+                    <span>维修工单管理</span>
+                  </el-badge>
                 </template>
                 <el-menu-item-group>
-                  <el-menu-item index="/Home/Orders">受理工单</el-menu-item>
+                  <el-menu-item index="/Home/Orders" @click="showOrderCount = ''">
+                    <el-badge :value="showOrderCount" class="item">
+                      <span>受理工单</span>
+                    </el-badge>
+                  </el-menu-item>
                   <el-menu-item index="/Home/CompleteOrder">工单历史</el-menu-item>
                 </el-menu-item-group>
               </el-submenu>
@@ -72,7 +78,7 @@ export default {
   name: 'Home',
   data () {
     return {
-      // adminInfo: {}
+      showOrderCount: ''
     }
   },
   methods: {
@@ -86,11 +92,50 @@ export default {
       this.$router.push({
         name: 'Admin'
       })
+    },
+    orderCountChange () {
+      this.axios.get('/api/orders/getAllOrdersInfo', {
+        params: {
+          page: 1
+        }
+      }).then(function (res) {
+        if (res.data.status === 200) {
+          let oldCount = this.$cookies.get('orderCountCookie')
+          let newCount = res.data.data.pageMap.count
+          if (oldCount === '') {
+            this.$cookies.set('orderCountCookie', newCount, 30 * 24 * 3600)
+          } else {
+            if (oldCount < newCount) {
+              let showFlag = false
+              let showCount = newCount - oldCount
+              if (this.showOrderCount < showCount) {
+                showFlag = true
+              }
+              this.showOrderCount = showCount
+              if (showFlag) {
+                this.$notify({
+                  title: '新的维修工单',
+                  message: '有' + showCount + '条新的维修工单，请及时查阅！'
+                })
+              }
+            } else {
+              this.showOrderCount = ''
+            }
+          }
+        } else {
+          this.$message.error('服务器出现错误，请重新登陆再试')
+        }
+      }.bind(this)).catch(function (error) {
+        console.log(error)
+        this.$message.error('服务器出现错误，请稍后再试！')
+      }.bind(this))
     }
   },
   mounted () {
     // this.adminInfo = this.$store.state.adminInfo
     this.init()
+    this.orderCountChange()
+    setInterval(this.orderCountChange, 30 * 1000)
   }
 }
 </script>

@@ -8,6 +8,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import vuex from 'vuex'
+import VueCookies from 'vue-cookies'
 
 // import Login from './components/Login'
 // import Home from './components/Home'
@@ -17,11 +18,13 @@ Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.use(VueAxios, axios)
 Vue.use(vuex)
+Vue.use(VueCookies)
 
 var store = new vuex.Store({// store对象
   state: {
     adminInfo: {},
-    ServerDomain: 'http://localhost:8081'
+    ServerDomain: 'http://localhost:8081',
+    orderCount: ''
   }
 })
 /* eslint-disable no-new */

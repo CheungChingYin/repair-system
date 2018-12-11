@@ -183,6 +183,7 @@ export default {
             tempArray.push(info)
             this.Info = tempArray
           }
+          this.$cookies.set('orderCountCookie', res.data.data.pageMap.count, 30 * 24 * 3600)
         }
       }.bind(this)).catch(function (error) {
         console.log(error)
