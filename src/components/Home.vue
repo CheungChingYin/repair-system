@@ -41,7 +41,7 @@
                 </template>
                 <el-menu-item-group>
                   <el-menu-item index="/Home/Orders">受理工单</el-menu-item>
-                  <el-menu-item index="1-2">工单历史</el-menu-item>
+                  <el-menu-item index="/Home/CompleteOrder">工单历史</el-menu-item>
                 </el-menu-item-group>
               </el-submenu>
               <el-menu-item index="3">

@@ -4,6 +4,7 @@ import Login from '../components/Login'
 import Home from '../components/Home'
 import Admin from '../components/Admin'
 import Orders from '../components/Orders'
+import CompleteOrder from '../components/CompleteOrder'
 
 Vue.use(Router)
 
@@ -28,6 +29,11 @@ export default new Router({
           path: 'Orders',
           name: 'Orders',
           component: Orders
+        },
+        {
+          path: 'CompleteOrder',
+          name: 'CompleteOrder',
+          component: CompleteOrder
         }
       ]
     }
