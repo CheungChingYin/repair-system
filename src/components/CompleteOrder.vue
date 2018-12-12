@@ -6,7 +6,7 @@
         <el-input type="text" placeholder="请输入历史工单ID或是问题关键词" v-model="completeOrderSearchBar"/>
       </el-col>
       <el-col :span="1">
-        <el-button type="primary" @click="completeOrderSearchEvent">搜索</el-button>
+        <el-button type="primary" @click="completeOrderSearchEvent(1)">搜索</el-button>
       </el-col>
     </el-row>
     <el-row type="flex" justify="center">
@@ -200,26 +200,30 @@ export default {
       })
     },
     handleCurrentChange (val) {
-      this.axios.get('/api/completeOrders/getAllCompleteOrderInfo', {
-        params: {
-          page: val
-        }
-      }).then(function (res) {
-        if (res.data.status === 200) {
-          this.pageMap = res.data.data.pageMap
-          let info = res.data.data.Info
-          if (info instanceof Array) {
-            this.Info = info
-          } else {
-            let tempArray = []
-            tempArray.push(info)
-            this.Info = tempArray
+      if (this.completeOrderSearchBar === '') {
+        this.axios.get('/api/completeOrders/getAllCompleteOrderInfo', {
+          params: {
+            page: val
           }
-        }
-      }.bind(this)).catch(function (error) {
-        console.log(error)
-        this.$message.error('获取管理员列表失败，疑似服务器出现问题，请稍后重试')
-      }.bind(this))
+        }).then(function (res) {
+          if (res.data.status === 200) {
+            this.pageMap = res.data.data.pageMap
+            let info = res.data.data.Info
+            if (info instanceof Array) {
+              this.Info = info
+            } else {
+              let tempArray = []
+              tempArray.push(info)
+              this.Info = tempArray
+            }
+          }
+        }.bind(this)).catch(function (error) {
+          console.log(error)
+          this.$message.error('获取管理员列表失败，疑似服务器出现问题，请稍后重试')
+        }.bind(this))
+      } else {
+        this.completeOrderSearchEvent(val)
+      }
     },
     deleteCompleteOrder (orderId) {
       this.$confirm('此操作将永久删除该工单, 是否继续?', '提示', {
@@ -252,7 +256,7 @@ export default {
         })
       })
     },
-    completeOrderSearchEvent () {
+    completeOrderSearchEvent (val) {
       let searchContext = this.completeOrderSearchBar
       let reg = /^[0-9]*$/
       let path = ''
@@ -260,13 +264,13 @@ export default {
       if (reg.test(searchContext)) {
         path = '/api/completeOrders/getCompleteOrderInfoById'
         params = {
-          page: 1,
+          page: val,
           completeOrderId: searchContext
         }
       } else {
         path = '/api/completeOrders/getCompleteOrderInfoByKeyWord'
         params = {
-          page: 1,
+          page: val,
           keyWord: searchContext
         }
       }
