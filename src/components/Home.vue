@@ -54,7 +54,7 @@
                 <i class="el-icon-menu"></i>
                 <span slot="title">实训室管理</span>
               </el-menu-item>
-              <el-menu-item index="4">
+              <el-menu-item index="/Home/Building">
                 <i class="el-icon-location-outline"></i>
                 <span slot="title">实训楼管理</span>
               </el-menu-item>

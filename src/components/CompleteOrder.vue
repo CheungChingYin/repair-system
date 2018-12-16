@@ -106,12 +106,12 @@
     <el-dialog
       title="历史工单修改"
       :visible.sync="dialogVisible.completeOrderUpdate">
-      <el-form ref="completeOrderUpdateForm" :model="completeOrderUpdateInfo" label-width="80px">
+      <el-form ref="completeOrderUpdateForm" :model="buildingAddInfo" label-width="80px">
         <el-form-item label="问题详情:">
-          <el-input type="textarea" v-model="completeOrderUpdateInfo.problem" placeholder="请输入问题"></el-input>
+          <el-input type="textarea" v-model="buildingAddInfo.problem" placeholder="请输入问题"></el-input>
         </el-form-item>
         <el-form-item label="备注:">
-          <el-input type="textarea" v-model="completeOrderUpdateInfo.remark" placeholder="请输入备注"></el-input>
+          <el-input type="textarea" v-model="buildingAddInfo.remark" placeholder="请输入备注"></el-input>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -135,7 +135,7 @@ export default {
         completeOrderUpdate: false
       },
       imageSrc: '',
-      completeOrderUpdateInfo: {
+      buildingAddInfo: {
         orderId: '',
         problem: '',
         remark: ''
@@ -172,13 +172,13 @@ export default {
       console.log(this.imageSrc)
     },
     completeOrderUpdateEvent (orderContext) {
-      this.completeOrderUpdateInfo.orderId = orderContext.orderId
-      this.completeOrderUpdateInfo.problem = orderContext.problem
-      this.completeOrderUpdateInfo.remark = orderContext.remark
+      this.buildingAddInfo.orderId = orderContext.orderId
+      this.buildingAddInfo.problem = orderContext.problem
+      this.buildingAddInfo.remark = orderContext.remark
       this.dialogVisible.completeOrderUpdate = true
     },
     completeOrderUpdateSubmit () {
-      this.axios.post('/api/completeOrders/updateCompleteOrder', this.completeOrderUpdateInfo, {
+      this.axios.post('/api/completeOrders/updateCompleteOrder', this.buildingAddInfo, {
         headers: {
           'Accept': '*/*',
           'Content-Type': 'application/json'
