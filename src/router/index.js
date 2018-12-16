@@ -5,7 +5,8 @@ import Home from '../components/Home'
 import Admin from '../components/Admin'
 import Orders from '../components/Orders'
 import CompleteOrder from '../components/CompleteOrder'
-import Building from  '../components/Building'
+import Building from '../components/Building'
+import Clazz from '../components/Clazz'
 
 Vue.use(Router)
 
@@ -40,6 +41,11 @@ export default new Router({
           path: 'Building',
           name: 'Building',
           component: Building
+        },
+        {
+          path: 'Clazz',
+          name: 'Clazz',
+          component: Clazz
         }
       ]
     }

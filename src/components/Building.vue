@@ -3,7 +3,7 @@
     <el-row type="flex" style="height: 50px;">
       <el-col :span="19"><span style="font-size: 40px">实训楼管理</span></el-col>
       <el-col :span="4">
-        <el-input type="text" placeholder="请输入实训楼ID或者姓名" v-model="buildingSearchBar"/>
+        <el-input type="text" placeholder="请输入实训楼ID或者实训楼名称" v-model="buildingSearchBar"/>
       </el-col>
       <el-col :span="1">
         <el-button type="primary" @click="buildingSearchEvent(1)">搜索</el-button>

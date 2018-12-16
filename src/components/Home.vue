@@ -50,7 +50,7 @@
                   <el-menu-item index="/Home/CompleteOrder">工单历史</el-menu-item>
                 </el-menu-item-group>
               </el-submenu>
-              <el-menu-item index="3">
+              <el-menu-item index="/Home/Clazz">
                 <i class="el-icon-menu"></i>
                 <span slot="title">实训室管理</span>
               </el-menu-item>
