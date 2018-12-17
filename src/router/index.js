@@ -7,6 +7,7 @@ import Orders from '../components/Orders'
 import CompleteOrder from '../components/CompleteOrder'
 import Building from '../components/Building'
 import Clazz from '../components/Clazz'
+import QRCode from '../components/QRCode'
 
 Vue.use(Router)
 
@@ -46,6 +47,11 @@ export default new Router({
           path: 'Clazz',
           name: 'Clazz',
           component: Clazz
+        },
+        {
+          path: 'QRCode',
+          name: 'QRCode',
+          component: QRCode
         }
       ]
     }

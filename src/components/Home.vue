@@ -58,7 +58,7 @@
                 <i class="el-icon-location-outline"></i>
                 <span slot="title">实训楼管理</span>
               </el-menu-item>
-              <el-menu-item index="3">
+              <el-menu-item index="/Home/QRCode">
                 <i class="el-icon-picture-outline"></i>
                 <span slot="title">二维码管理</span>
               </el-menu-item>

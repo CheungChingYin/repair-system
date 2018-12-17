@@ -24,7 +24,8 @@ var store = new vuex.Store({// store对象
   state: {
     adminInfo: {},
     ServerDomain: 'http://localhost:8081',
-    orderCount: ''
+    orderCount: '',
+    domain: 'localhost:8081'
   }
 })
 /* eslint-disable no-new */
