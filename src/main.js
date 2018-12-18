@@ -25,7 +25,8 @@ var store = new vuex.Store({// store对象
     adminInfo: {},
     ServerDomain: 'http://localhost:8081',
     orderCount: '',
-    domain: 'localhost:8081'
+    domain: 'localhost:8081',
+    repairFormPath: 'localhost:8081/SubmitRepair'
   }
 })
 /* eslint-disable no-new */

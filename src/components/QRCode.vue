@@ -37,7 +37,7 @@
           <span>*注意：如果"电脑开始编号"和"电脑结束编号"一致，则视为打印一台电脑的二维码</span>
           <el-form-item>
             <el-button style="margin-right: 50px">重置</el-button>
-            <el-button type="primary" @click="QRCodeSubmit">确认添加</el-button>
+            <el-button type="primary" @click="QRCodeSubmit">开始生成</el-button>
           </el-form-item>
         </el-form>
       </el-col>
@@ -148,7 +148,7 @@ export default {
       this.QRCodeInfo.classId = ''
       let obj = {}
       obj = this.buildingInfo.find((item) => {
-        return item.buildingId == buildingId
+        return item.buildingId === buildingId
       })
       // console.log(obj.buildingName)
       this.QRCodeInfo.buildingName = obj.buildingName
@@ -158,7 +158,7 @@ export default {
       let classId = this.QRCodeInfo.classId
       let obj = {}
       obj = this.classInfo.find((item) => {
-        return item.classId == classId
+        return item.classId === classId
       })
       console.log(obj.className)
       // this.queryClassInfoByClassId()
@@ -169,14 +169,8 @@ export default {
     QRCodeSubmit () {
       this.$refs['QRCodeForm'].validate((valid) => {
         if (valid) {
-          this.QRCodeInfo.domain = this.$store.state.domain + '/SubmitRepair'
-          // console.log(this.QRCodeInfo.domain)
-          // console.log(this.QRCodeInfo.classId)
-          // console.log(this.QRCodeInfo.className)
-          // console.log(this.QRCodeInfo.buildingId)
-          // console.log(this.QRCodeInfo.buildingName)
-          // console.log(this.QRCodeInfo.computerStartNum)
-          // console.log(this.QRCodeInfo.computerEndNum)
+          this.QRCodeInfo.domain = this.$store.state.repairFormPath
+          console.log(this.QRCodeInfo.domain)
           let url = this.$store.state.ServerDomain + '/QRCode/QRCodeDownLoad?domain=' + this.QRCodeInfo.domain + '&buildingId=' + this.QRCodeInfo.buildingId + '&buildingName=' + this.QRCodeInfo.buildingName + '&classId=' + this.QRCodeInfo.classId + '&className=' + this.QRCodeInfo.className + '&computerStartNum=' + this.QRCodeInfo.computerStartNum + '&computerEndNum=' + this.QRCodeInfo.computerEndNum
           this.download(url)
         } else {

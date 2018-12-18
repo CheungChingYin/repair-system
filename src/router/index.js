@@ -8,10 +8,12 @@ import CompleteOrder from '../components/CompleteOrder'
 import Building from '../components/Building'
 import Clazz from '../components/Clazz'
 import QRCode from '../components/QRCode'
+import SubmitRepair from '../components/SubmitRepair'
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -54,6 +56,11 @@ export default new Router({
           component: QRCode
         }
       ]
+    },
+    {
+      path: '/SubmitRepair',
+      name: 'SubmitRepair',
+      component: SubmitRepair
     }
   ]
 })
