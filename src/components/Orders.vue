@@ -126,7 +126,8 @@
     </el-row>
     <el-dialog
       title="图片"
-      :visible.sync="dialogVisible.showImage">
+      :visible.sync="dialogVisible.showImage"
+      >
       <!--<image :src="imageSrc"/>-->
       <img :src="imageSrc"/>
     </el-dialog>
