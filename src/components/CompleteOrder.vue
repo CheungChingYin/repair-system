@@ -101,21 +101,21 @@
       title="图片"
       :visible.sync="dialogVisible.showImage">
       <!--<image :src="imageSrc"/>-->
-      <img :src="imageSrc"/>
+      <img :src="imageSrc" style="width: 900px; height: 900px;" @click="imageClick"/>
     </el-dialog>
     <el-dialog
       title="历史工单修改"
       :visible.sync="dialogVisible.completeOrderUpdate">
-      <el-form ref="completeOrderUpdateForm" :model="buildingAddInfo" label-width="80px">
+      <el-form ref="completeOrderUpdateForm" :model="updateCompleteOrderInfo" label-width="80px">
         <el-form-item label="问题详情:">
-          <el-input type="textarea" v-model="buildingAddInfo.problem" placeholder="请输入问题"></el-input>
+          <el-input type="textarea" v-model="updateCompleteOrderInfo.problem" placeholder="请输入问题"></el-input>
         </el-form-item>
         <el-form-item label="备注:">
-          <el-input type="textarea" v-model="buildingAddInfo.remark" placeholder="请输入备注"></el-input>
+          <el-input type="textarea" v-model="updateCompleteOrderInfo.remark" placeholder="请输入备注"></el-input>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
-    <el-button >重置</el-button>
+    <el-button @click="resetCompleteOrderForm">重置</el-button>
     <el-button type="danger" @click="completeOrderUpdateSubmit">确认修改</el-button>
   </span>
     </el-dialog>
@@ -292,6 +292,20 @@ export default {
         console.log(error)
         this.$message.error('服务器出现错误，请稍后再试！')
       }.bind(this))
+    },
+    imageClick () {
+      let url = this.imageSrc
+      let link = document.createElement('a')
+      link.style.display = 'none'
+      link.href = url
+      document.body.appendChild(link)
+      link.click()
+    },
+    resetCompleteOrderForm () {
+      this.$refs['completeOrderUpdateForm'].resetFields()
+      this.$refs['completeOrderUpdateForm'].clearValidate()
+      this.buildingAddInfo.problem = ''
+      this.buildingAddInfo.remark = ''
     }
   },
   mounted () {

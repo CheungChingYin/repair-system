@@ -5,12 +5,11 @@
         <el-row type="flex">
           <el-col :span="22"><span>佛山职业技术学院机房管理团队</span></el-col>
           <el-col :span="2">
-            <el-dropdown>
+            <el-dropdown @command="navigateToHandler">
               <i class="el-icon-setting" style="margin-right: 10px;color: #fff;"></i>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item>管理员信息</el-dropdown-item>
-                <el-dropdown-item>账户设置</el-dropdown-item>
-                <el-dropdown-item>登出</el-dropdown-item>
+                <el-dropdown-item command="SelfInfo">账户设置</el-dropdown-item>
+                <el-dropdown-item command="logout">登出</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
             <span>{{$store.state.adminInfo.adminName}}</span>
@@ -129,6 +128,30 @@ export default {
         console.log(error)
         this.$message.error('服务器出现错误，请稍后再试！')
       }.bind(this))
+    },
+    navigateToHandler (command) {
+      console.log(command)
+      if (command === 'logout') {
+        this.$confirm('此操作将登出管理员账户, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.axios.post('/api/admin/logout')
+          this.$router.push({
+            name: 'Login'
+          })
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          })
+        })
+        return
+      }
+      this.$router.push({
+        name: command
+      })
     }
   },
   mounted () {

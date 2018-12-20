@@ -345,6 +345,13 @@ export default {
     updateAdminReset () {
       this.$refs['updateAdminForm'].resetFields()
       this.$refs['updateAdminForm'].clearValidate()
+      this.updateAdminInfo = {
+        adminEmail: '',
+        adminId: '',
+        adminName: '',
+        adminPhone: '',
+        roleId: ''
+      }
     },
     resetAdminPasswordSubmit () {
       this.$refs['resetAdminPasswordForm'].validate((valid) => {
@@ -381,6 +388,7 @@ export default {
       })
     },
     resetAdminPasswordReset () {
+      this.resetAdminPasswordInfo = {}
       this.$refs['resetAdminPasswordForm'].resetFields()
       this.$refs['resetAdminPasswordForm'].clearValidate()
     },

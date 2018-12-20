@@ -9,6 +9,7 @@ import Building from '../components/Building'
 import Clazz from '../components/Clazz'
 import QRCode from '../components/QRCode'
 import SubmitRepair from '../components/SubmitRepair'
+import SelfInfo from '../components/SelfInfo'
 
 Vue.use(Router)
 
@@ -54,6 +55,11 @@ export default new Router({
           path: 'QRCode',
           name: 'QRCode',
           component: QRCode
+        },
+        {
+          path: 'SelfInfo',
+          name: 'SelfInfo',
+          component: SelfInfo
         }
       ]
     },

@@ -93,7 +93,7 @@
           </el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
-    <el-button>重置</el-button>
+    <el-button @click="resetClazzAddForm">重置</el-button>
     <el-button type="primary" @click="clazzAddSubmit">确认添加</el-button>
   </span>
       </el-dialog>
@@ -125,7 +125,7 @@
           </el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
-    <el-button>重置</el-button>
+    <el-button @click="resetUpdateClazz">重置</el-button>
     <el-button type="primary" @click="clazzUpdateSubmit">确认修改</el-button>
   </span>
       </el-dialog>
@@ -392,6 +392,19 @@ export default {
       } else {
         this.clazzSearchEvent(val)
       }
+    },
+    resetClazzAddForm () {
+      this.$refs['clazzAddForm'].resetFields()
+      this.$refs['clazzAddForm'].clearValidate()
+    },
+    resetUpdateClazz () {
+      this.$refs['clazzUpdateForm'].resetFields()
+      this.$refs['clazzUpdateForm'].clearValidate()
+      this.ClazzUpdateInfo.className = ''
+      this.ClazzUpdateInfo.buildingId = ''
+      this.ClazzUpdateInfo.computerTotal = ''
+      this.ClazzUpdateInfo.computerEnable = ''
+      this.ClazzUpdateInfo.computerDisable = ''
     }
   },
   mounted () {

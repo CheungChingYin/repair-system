@@ -129,7 +129,7 @@
       :visible.sync="dialogVisible.showImage"
       >
       <!--<image :src="imageSrc"/>-->
-      <img :src="imageSrc"/>
+      <img :src="imageSrc" style="width: 900px; height: 900px;" @click="imageClick"/>
     </el-dialog>
     <el-dialog
       title="工单完成"
@@ -353,6 +353,14 @@ export default {
           }
         }
       }.bind(this))
+    },
+    imageClick () {
+      let url = this.imageSrc
+      let link = document.createElement('a')
+      link.style.display = 'none'
+      link.href = url
+      document.body.appendChild(link)
+      link.click()
     }
   },
   mounted () {

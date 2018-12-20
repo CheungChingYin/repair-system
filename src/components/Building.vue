@@ -58,7 +58,7 @@
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
-    <el-button>重置</el-button>
+    <el-button @click="resetBuildingAddForm">重置</el-button>
     <el-button type="primary" @click="buildingAddSubmit">确认添加</el-button>
   </span>
     </el-dialog>
@@ -71,7 +71,7 @@
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
-    <el-button>重置</el-button>
+    <el-button @click="resetUpdateBuildingForm">重置</el-button>
     <el-button type="danger" @click="buildingUpdateSubmit">确认修改</el-button>
   </span>
     </el-dialog>
@@ -275,6 +275,16 @@ export default {
       } else {
         this.buildingSearchEvent(val)
       }
+    },
+    resetBuildingAddForm () {
+      this.$refs['buildingAddForm'].resetFields()
+      this.$refs['buildingAddForm'].clearValidate()
+      this.buildingAddInfo.buildingName = ''
+    },
+    resetUpdateBuildingForm () {
+      this.$refs['buildingUpdateForm'].resetFields()
+      this.$refs['buildingUpdateForm'].clearValidate()
+      this.buildingUpdateInfo.buildingName = ''
     }
   },
   mounted () {

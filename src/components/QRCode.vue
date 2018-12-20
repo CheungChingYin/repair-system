@@ -36,7 +36,7 @@
           </el-form-item>
           <span>*注意：如果"电脑开始编号"和"电脑结束编号"一致，则视为打印一台电脑的二维码</span>
           <el-form-item>
-            <el-button style="margin-right: 50px">重置</el-button>
+            <el-button style="margin-right: 50px" @click="resetQRCodeInfo">重置</el-button>
             <el-button type="primary" @click="QRCodeSubmit">开始生成</el-button>
           </el-form-item>
         </el-form>
@@ -191,6 +191,10 @@ export default {
       link.href = url
       document.body.appendChild(link)
       link.click()
+    },
+    resetQRCodeInfo () {
+      this.$refs['QRCodeForm'].resetFields()
+      this.$refs['QRCodeForm'].clearValidate()
     }
   },
   mounted () {
