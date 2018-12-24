@@ -135,7 +135,7 @@ export default {
         completeOrderUpdate: false
       },
       imageSrc: '',
-      buildingAddInfo: {
+      updateCompleteOrderInfo: {
         orderId: '',
         problem: '',
         remark: ''
@@ -172,13 +172,13 @@ export default {
       console.log(this.imageSrc)
     },
     completeOrderUpdateEvent (orderContext) {
-      this.buildingAddInfo.orderId = orderContext.orderId
-      this.buildingAddInfo.problem = orderContext.problem
-      this.buildingAddInfo.remark = orderContext.remark
+      this.updateCompleteOrderInfo.orderId = orderContext.orderId
+      this.updateCompleteOrderInfo.problem = orderContext.problem
+      this.updateCompleteOrderInfo.remark = orderContext.remark
       this.dialogVisible.completeOrderUpdate = true
     },
     completeOrderUpdateSubmit () {
-      this.axios.post('/api/completeOrders/updateCompleteOrder', this.buildingAddInfo, {
+      this.axios.post('/api/completeOrders/updateCompleteOrder', this.updateCompleteOrderInfo, {
         headers: {
           'Accept': '*/*',
           'Content-Type': 'application/json'
@@ -304,8 +304,8 @@ export default {
     resetCompleteOrderForm () {
       this.$refs['completeOrderUpdateForm'].resetFields()
       this.$refs['completeOrderUpdateForm'].clearValidate()
-      this.buildingAddInfo.problem = ''
-      this.buildingAddInfo.remark = ''
+      this.updateCompleteOrderInfo.problem = ''
+      this.updateCompleteOrderInfo.remark = ''
     }
   },
   mounted () {
