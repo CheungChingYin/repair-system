@@ -90,7 +90,7 @@ export default {
         addBuilding: false,
         updateBuilding: false
       },
-      updateCompleteOrderInfo: {
+      buildingAddInfo: {
         buildingName: ''
       },
       buildingUpdateInfo: {
@@ -130,14 +130,14 @@ export default {
       }.bind(this))
     },
     addBuildingEvent () {
-      this.updateCompleteOrderInfo.buildingName = ''
+      this.buildingAddInfo.buildingName = ''
       this.dialogVisible.addBuilding = true
       this.$refs['buildingAddForm'].resetFields()
     },
     buildingAddSubmit () {
       this.$refs['buildingAddForm'].validate((valid) => {
         if (valid) {
-          this.axios.post('/api/building/saveBuildingInfo', this.updateCompleteOrderInfo, {
+          this.axios.post('/api/building/saveBuildingInfo', this.buildingAddInfo, {
             headers: {
               'Accept': '*/*',
               'Content-Type': 'application/json'
@@ -279,7 +279,7 @@ export default {
     resetBuildingAddForm () {
       this.$refs['buildingAddForm'].resetFields()
       this.$refs['buildingAddForm'].clearValidate()
-      this.updateCompleteOrderInfo.buildingName = ''
+      this.buildingAddInfo.buildingName = ''
     },
     resetUpdateBuildingForm () {
       this.$refs['buildingUpdateForm'].resetFields()

@@ -27,7 +27,7 @@
               text-color="#fff"
               active-text-color="#ffd04b"
               :router="true">
-              <el-menu-item index="/Home/Admin">
+              <el-menu-item index="/Home/Admin" v-if="$store.state.adminInfo.roleId == 1">
                 <template slot="title">
                   <i class="el-icon-info"></i>
                   <span>管理员管理</span>
