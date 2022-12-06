@@ -174,7 +174,7 @@ export default {
     background-color: #545c64;
     color: #333;
     text-align: left;
-    height: 1024px;
+    height: 100vh;
   }
 
   .el-main {
