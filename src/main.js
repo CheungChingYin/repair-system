@@ -27,7 +27,8 @@ var store = new vuex.Store({// store对象
     orderCount: '',
     domain: 'localhost:8081',
     repairFormPath: 'localhost:8081/SubmitRepair',
-    uploadImagePath: '/api/orders/uploadImage'
+    uploadImagePath: '/api/orders/uploadImage',
+    webSocketPath: 'http://localhost:8081/endpointOne'
   }
 })
 /* eslint-disable no-new */
