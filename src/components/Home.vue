@@ -4,7 +4,7 @@
       <el-header height="80px" style="font-size: 24px">
         <el-row type="flex">
           <el-col :span="22"><span>佛山职业技术学院机房管理团队</span></el-col>
-          <el-col :span="2">
+          <el-col :span="3">
             <el-dropdown @command="navigateToHandler">
               <i class="el-icon-setting" style="margin-right: 10px;color: #fff;"></i>
               <el-dropdown-menu slot="dropdown">
