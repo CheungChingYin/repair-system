@@ -3,7 +3,7 @@
     <el-container>
       <el-header height="80px" style="font-size: 24px">
         <el-row type="flex">
-          <el-col :span="22"><span>佛山职业技术学院机房管理团队</span></el-col>
+          <el-col :span="22"><span>广州商学院机房管理团队</span></el-col>
           <el-col :span="3">
             <el-dropdown @command="navigateToHandler">
               <i class="el-icon-setting" style="margin-right: 10px;color: #fff;"></i>
@@ -99,7 +99,7 @@ export default {
     createWebSocketConnect () {
       let that = this
       // 建立WebSocket
-      let socket = new SockJS('$store.state.webSocketPath')
+      let socket = new SockJS(that.$store.state.webSocketPath)
       stompClient = Stomp.over(socket)
       stompClient.connect({}, function (frame) {
         stompClient.subscribe('/topic/receiveOrder', function (response) {
