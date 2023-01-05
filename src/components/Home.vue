@@ -3,8 +3,8 @@
     <el-container>
       <el-header height="80px" style="font-size: 24px">
         <el-row type="flex">
-          <el-col :span="22"><span>佛山职业技术学院机房管理团队</span></el-col>
-          <el-col :span="2">
+          <el-col :span="22"><span>广州商学院机房管理团队</span></el-col>
+          <el-col :span="3">
             <el-dropdown @command="navigateToHandler">
               <i class="el-icon-setting" style="margin-right: 10px;color: #fff;"></i>
               <el-dropdown-menu slot="dropdown">
@@ -73,6 +73,9 @@
 </template>
 
 <script>
+import SockJS from 'sockjs-client'
+import Stomp from 'stompjs'
+var stompClient = null
 export default {
   name: 'Home',
   data () {
@@ -92,42 +95,34 @@ export default {
         name: 'Admin'
       })
     },
-    orderCountChange () {
-      this.axios.get('/api/orders/getAllOrdersInfo', {
-        params: {
-          page: 1
-        }
-      }).then(function (res) {
-        if (res.data.status === 200) {
-          let oldCount = this.$cookies.get('orderCountCookie')
-          let newCount = res.data.data.pageMap.count
-          if (oldCount === '') {
-            this.$cookies.set('orderCountCookie', newCount, 30 * 24 * 3600)
+    // 新建webSocket连接
+    createWebSocketConnect () {
+      let that = this
+      // 建立WebSocket
+      let socket = new SockJS(that.$store.state.webSocketPath)
+      stompClient = Stomp.over(socket)
+      stompClient.connect({}, function (frame) {
+        stompClient.subscribe('/topic/receiveOrder', function (response) {
+          console.log(response)
+          if (response != null && response.body != null) {
+            that.$notify({
+              title: '新的维修工单',
+              message: response.body
+            })
           } else {
-            if (oldCount < newCount) {
-              let showFlag = false
-              let showCount = newCount - oldCount
-              if (this.showOrderCount < showCount) {
-                showFlag = true
-              }
-              this.showOrderCount = showCount
-              if (showFlag) {
-                this.$notify({
-                  title: '新的维修工单',
-                  message: '有' + showCount + '条新的维修工单，请及时查阅！'
-                })
-              }
-            } else {
-              this.showOrderCount = ''
-            }
+            that.$notify({
+              title: '建立WebSocket通讯',
+              message: '建立WebSocket通讯，暂时无法进行新增工单提醒'
+            })
           }
-        } else {
-          this.$message.error('服务器出现错误，请重新登陆再试')
-        }
-      }.bind(this)).catch(function (error) {
-        console.log(error)
-        this.$message.error('服务器出现错误，请稍后再试！')
-      }.bind(this))
+        })
+      })
+    },
+    // 断开webSocket连接
+    disconnectWebSocket () {
+      if (stompClient != null) {
+        stompClient.disconnect()
+      }
     },
     navigateToHandler (command) {
       console.log(command)
@@ -138,6 +133,7 @@ export default {
           type: 'warning'
         }).then(() => {
           this.axios.post('/api/admin/logout')
+          this.disconnectWebSocket()
           this.$router.push({
             name: 'Login'
           })
@@ -157,8 +153,7 @@ export default {
   mounted () {
     // this.adminInfo = this.$store.state.adminInfo
     this.init()
-    this.orderCountChange()
-    setInterval(this.orderCountChange, 30 * 1000)
+    this.createWebSocketConnect()
   }
 }
 </script>
@@ -174,7 +169,7 @@ export default {
     background-color: #545c64;
     color: #333;
     text-align: left;
-    height: 1024px;
+    height: 100vh;
   }
 
   .el-main {
