@@ -14,7 +14,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.2",
     "element-ui": "^2.4.11",
     "qs": "^6.6.0",
     "sockjs-client": "^1.6.1",
